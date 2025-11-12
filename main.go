@@ -1,71 +1,96 @@
 package main
 
 import (
-	"errors"
-	"fmt"    "log"    "os")
+	"Poligon/Operator"
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+)
 
 func main() {
 
-	calculator()
-
-}
-
-func calculator() {
-
-	var operandOne int
-	var operandTwo int
-	var operator string
-
-	fmt.Println("Добро пожаловать в калькулятор")
-
+	fmt.Println("Ваш банковский счет")
+	cashAccount := 1000
 	for {
-		fmt.Println("\nДля ознакомления с правилами введите то что указанно в [] [0 help 0]")
-		fmt.Println("Для выхода из приложения введите [] [0 exit 0]")
+		scanner := bufio.NewScanner(os.Stdin)
+		fmt.Println("Выберете команду" +
+			"\n1 - Выдать наличные" +
+			"\n2 - показать баланс" +
+			"\n3 - провести онлайн оплату" +
+			"\nexit - завершить работу")
 
-		_, err := fmt.Scan(&operandOne, &operator, &operandTwo)
+		if ok := scanner.Scan(); !ok {
+			fmt.Println("Ошибка ввода")
+			return
+		}
+
+		input := scanner.Text()
+
+		err := Operator.ExecutionError()
 		if err != nil {
-			log.Fatal(err)
-		}
-		if operandOne < -1000 || operandTwo < -1000 {
-			fmt.Println(errors.New("величина операнда не должна быть меньше -1000"))
-			continue
-		}
-		if operandOne > 1000 || operandTwo > 1000 {
-			fmt.Println(errors.New("величина операнда не должна быть больше 1000"))
+			fmt.Println(err)
 			continue
 		}
 
-		switch operator {
+		switch input {
 
-		case "+":
-			fmt.Println(operandOne + operandTwo)
-			break
-		case "-":
-			fmt.Println(operandOne - operandTwo)
-			break
-		case "/":
-			if operandTwo == 0 {
-				fmt.Println(errors.New("на 0 делить нельзя"))
-				continue
+		case "1":
+			fmt.Println("Введите сумму ")
+			if ok := scanner.Scan(); !ok {
+				fmt.Println("Ошибка ввода")
+				return
 			}
-			fmt.Println(operandOne / operandTwo)
+			userRequest, err := strconv.Atoi(scanner.Text())
+			if err != nil {
+				fmt.Println("804 -ошибка ввода, некорректное число")
+			}
+			cashAccount, _ = Operator.GiveCash(cashAccount, userRequest)
+
+			fmt.Println("Выдача наличных средств")
 			break
-		case "*":
-			fmt.Println(operandOne * operandTwo)
+
+		case "2":
+			fmt.Println("Баланс составляет", cashAccount)
 			break
+
+		case "3":
+			fmt.Println("Введите сумму оплаты")
+			if ok := scanner.Scan(); !ok {
+				fmt.Println("Ошибка ввода")
+				return
+			}
+			userRequest, err := strconv.Atoi(scanner.Text())
+			if err != nil {
+				fmt.Println("804 -ошибка ввода, некорректное число")
+			}
+			cashAccount, _ = Operator.OnlinePayment(cashAccount, userRequest)
+			fmt.Println("Оплата выполнена успешно")
+
+			break
+
 		case "exit":
 			os.Exit(0)
-		case "help":
-			fmt.Println("Запрещено  деление на 0")
-			fmt.Println("Существует ограничение аргументов они не могут быть больше 1000 и меньше -1000 ")
-			fmt.Println("Правила ввода:  вводить в таком формате 1 + 1 ")
-			fmt.Println("То есть разделять операторы и операнд пробелами, Прим: [-1000 + 1000]")
-			break
 
 		default:
-			fmt.Println("Не известная команда")
+			fmt.Println("ошибка 801 - не известная команда")
 		}
 
 	}
 
 }
+
+/*
+Коды ошибок
+ 800 - ошибка проведения операции
+ 801 - ошибка, не известная команда
+ 802 - ошибка, недостаточно средств
+ 803 - ошибка ввода, сумма для выдачи не должна быть меньше 10
+ 804 - ошибка ввода, некорректное число
+ 805 -
+ 806 -
+ 807 -
+ 808 -
+ 809 -
+ 810 -
+*/
