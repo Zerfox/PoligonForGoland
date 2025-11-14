@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	Gorutine.GorutineMain()
+	Gorutine.Task_2()
 }
