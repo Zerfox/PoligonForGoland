@@ -1,4 +1,4 @@
-package Operator
+package Task_2
 
 import (
 	"errors"
