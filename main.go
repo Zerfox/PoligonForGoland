@@ -1,8 +1,7 @@
 package main
 
-import "Poligon/Select"
+import "Poligon/ChanelAxioms"
 
 func main() {
-
-	Select.SelectMain()
+	ChanelAxioms.ChanelMain()
 }
