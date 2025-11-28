@@ -1,9 +1,8 @@
 package main
 
-import (
-	"Poligon/Gorutine"
-)
+import "Poligon/Select"
 
 func main() {
-	Gorutine.GorutineMain()
+
+	Select.SelectMain()
 }
