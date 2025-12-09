@@ -1,7 +1,7 @@
 package main
 
-import "Poligon/WiteGroup"
+import "Poligon/DataRace"
 
 func main() {
-	WiteGroup.WiteGroupTask1()
+	DataRace.DataRaceTask1Main()
 }
