@@ -1,7 +1,7 @@
 package main
 
-import "Poligon/Context"
+import "Poligon/WiteGroup"
 
 func main() {
-	Context.MainTasc1()
+	WiteGroup.WiteGroupTask1()
 }
