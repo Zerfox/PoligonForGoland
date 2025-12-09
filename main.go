@@ -1,8 +1,7 @@
 package main
 
-import "Poligon/Select"
+import "Poligon/Context"
 
 func main() {
-
-	Select.SelectMain()
+	Context.MainTasc1()
 }
