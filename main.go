@@ -1,7 +1,7 @@
 package main
 
-import "Poligon/ChanelAxioms"
+import "Poligon/Context"
 
 func main() {
-	ChanelAxioms.ChanelMain()
+	Context.MainTasc1()
 }
