@@ -24,6 +24,7 @@ func WiteGroupTask1() {
 	wg.Add(gardians)
 
 	for i := 0; i < gardians; i++ {
+		wg.Add(1)
 		go pour(i+1, &wg)
 	}
 
