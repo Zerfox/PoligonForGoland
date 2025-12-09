@@ -17,23 +17,20 @@ import (
 
 func WiteGroupTask1() {
 	wg := sync.WaitGroup{}
-	defer wg.Wait()
-
-	gardians := rand.Intn(100)
-
-	wg.Add(gardians)
+	gardians := rand.Intn(10)
 
 	for i := 0; i < gardians; i++ {
 		wg.Add(1)
 		go pour(i+1, &wg)
 	}
 
+	wg.Wait()
 }
 
 func pour(numberGarian int, wg *sync.WaitGroup) {
 	defer wg.Done()
 
-	timeout := 500 + (100 * (rand.Intn(10)))
+	timeout := 500 + (100 * (rand.Intn(5)))
 
 	fmt.Println("Начало полива. Садовод № ", numberGarian)
 	time.Sleep(time.Duration(timeout) * time.Millisecond)
