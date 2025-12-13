@@ -3,5 +3,5 @@ package main
 import "Poligon/DataRace"
 
 func main() {
-	DataRace.DataRaceTask1Main()
+	DataRace.DataRaceTask2Main()
 }
