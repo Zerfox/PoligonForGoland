@@ -16,15 +16,17 @@ import (
 */
 
 func WiteGroupTask1() {
-	wg := sync.WaitGroup{}
+	wg := &sync.WaitGroup{}
 	gardians := rand.Intn(10)
 
 	for i := 0; i < gardians; i++ {
 		wg.Add(1)
-		go pour(i+1, &wg)
+		go pour(i+1, wg)
 	}
 
+	fmt.Println("Main завершился до ожидания")
 	wg.Wait()
+	fmt.Println("Main завершен окончательно ")
 }
 
 func pour(numberGarian int, wg *sync.WaitGroup) {
