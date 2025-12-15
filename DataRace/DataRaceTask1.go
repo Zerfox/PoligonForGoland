@@ -42,7 +42,7 @@ func DataRaceTask1Main() {
 
 	wg.Wait()
 	fmt.Println("Number of Votes: ", numberOfVotes, "\nNumber of vote = ", vote)
-	fmt.Println("Number of атомарный Votes: ", numberOfVotes, "\nNumber of атомарный Vote = ", atomicVote)
+	fmt.Println("Number of атомарный Votes: ", numberOfVotes, "\nNumber of атомарный Vote = ", atomicVote.Load())
 }
 
 /*
