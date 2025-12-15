@@ -9,22 +9,22 @@ import (
 
 /*
 В данном задании нужно было реализовать почтовик на который сыпяться сообщения и проверить будет ли гонка данных в этом случае и нужно было проверить есть ли она
-Я прогнал это конкурентном варианте и у меня не появилось гонки данных, если я правильно понимаю, гонки не было из-за того что добавление данных в слайс не требует точности
-Я пробовал начиная с 10 добавлять нули до 10000 и ни в одном случае поиск гонки данных -race не обнаружил у меня гонки
+	Гонка данных действительно возникает, я пофиксил ее мьютексом, пушто атомики требуют больших затрат
 */
 
 func DataRaceTask2Main() {
 	wg := &sync.WaitGroup{}
 	mail := make([]string, 0, 100)
 	ptMail := &mail
+	mtx := &sync.Mutex{}
 
-	for i := 0; i < 10000; i++ {
+	for i := 0; i < 1000; i++ {
 		wg.Add(1)
-		sendMessage(ptMail, wg)
+		go sendMessage(ptMail, wg, mtx)
 	}
 
 	wg.Wait()
-	fmt.Println("Скрипт отработал: ", mail)
+	fmt.Println("Скрипт отработал: ", len(mail))
 }
 
 func takeString() string {
@@ -38,7 +38,9 @@ func takeString() string {
 	return sb.String()
 }
 
-func sendMessage(mail *[]string, wg *sync.WaitGroup) {
+func sendMessage(mail *[]string, wg *sync.WaitGroup, mtx *sync.Mutex) {
 	defer wg.Done()
+	mtx.Lock()
 	*mail = append(*mail, takeString())
+	mtx.Unlock()
 }
