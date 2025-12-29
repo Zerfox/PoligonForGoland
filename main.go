@@ -1,11 +1,11 @@
 package main
 
+import "C"
 import (
-	"Poligon/DataRace/RWmutex"
+	"Poligon/Cuncurenci"
 )
 
 func main() {
-
-	RWmutex.RWmutexMine()
+	Cuncurenci.CimulatorMetCentraMain()
 
 }
