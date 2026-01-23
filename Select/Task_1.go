@@ -50,6 +50,9 @@ func SelectMain() {
 			fmt.Println(strChan)
 		case fChan := <-floatChan:
 			fmt.Println(fChan)
+		default:
+			time.Sleep(100 * time.Millisecond)
+
 		}
 	}
 }
