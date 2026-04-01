@@ -1,11 +1,11 @@
 package main
 
-import "C"
 import (
-	"Poligon/Cuncurenci"
+	"Poligon/ProjectLibrary"
 )
 
 func main() {
-	Cuncurenci.CimulatorMetCentraMain()
+
+	ProjectLibrary.MainLibrary()
 
 }
